@@ -1,32 +1,31 @@
 function getTotalX(a, b) {
-    let ints = b[0] - a[1];
-    let init = a[1];
-    let nFactors = 0;
+  let ints = b[0] - a[a.length - 1];
+  let init = a[a.length - 1];
+  let nFactors = 0;
 
-    for (let i = 1; i <= ints+1; i++) {
+  for (let i = init; i <= ints + init; i++) {
+    for (let j = 0; j < a.length; j++) {
+      if (i % a[j] != 0) {
+        break;
+      }
 
-        if ((init%a[0] == 0) && (init%a[1] == 0)) {
-            
-            for (let j = 0; j < b.length; j++) {
+      if (j == a.length - 1) {
+        for (let k = 0; k < b.length; k++) {
+          if (b[k] % i != 0) {
+            break;
+          }
 
-                if (b[j]%init != 0) {
-                    break;
-                }
-
-                if (j==b.length-1) {
-                    nFactors++;
-                }                
-            }
+          if (k == b.length - 1) {
+            nFactors++;
+          }
         }
-        init++;
+      }
     }
+  }
 
+  return nFactors;
 
-    return nFactors;
 }
 
-
-console.log(getTotalX([2,4], [16,32, 96]));
-
-
-
+console.log(getTotalX([2, 6], [24, 36]));
+// console.log(getTotalX([1], [100]));
